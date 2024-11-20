@@ -1,0 +1,82 @@
+/**
+ * 
+ */
+package labs.drone;
+
+import tellolib.control.DroneControl;
+
+
+/**
+ * 
+ */
+public class Lab4_mission1_altheavenus {
+		//coded by Althea Aguel and Venus Dinary 10/3/24
+		/**
+		 * @param args
+		 */
+		public static void main(String[] args) {
+			
+			
+			// TODO Auto-generated method stub
+			DroneControl myDrone = DroneControl.getInstance();
+
+	    	// connecting to the drone
+	    	myDrone.connect();
+	    	System.out.println("Connected to the Drone...");
+
+	    	// entering command mode
+	    	System.out.println("Entering Command Mode");
+	    	myDrone.enterCommandMode();
+
+	    	// taking off the drone
+
+	    	System.out.println("Taking off...");
+	    	myDrone.takeOff();
+	    
+	    	int altitude = 80;
+	    	
+	    	//up by 80cm
+	    	myDrone.up(altitude);
+
+	    	// Fly in an equilateral triangle
+	    	System.out.println("Flying in an equilateral triangle with side length 200 cm");
+	    	
+	    	int forward = 400;
+	    	
+
+	    	// Move forward 400cm
+	    	myDrone.forward(forward);
+	    	System.out.println("Moved forward 400");
+	    	
+
+	    	// Turn 130 degrees to the right (interior angle of an equilateral triangle)
+	    	myDrone.rotateRight(130);
+	    	System.out.println("Turned right 130 degrees");
+
+
+	    	// Repeat the side movements and turns to complete the triangle
+	    	myDrone.forward(forward);
+	    	System.out.println("Moved forward 400cm");
+	    	
+	    	
+	    	// Turn 110 degrees to the right (interior angle of an equilateral triangle)
+	    	myDrone.rotateRight(110);
+	    	System.out.println("Turned right 110 degrees");
+
+	    	// Move forward 300cm
+	    	myDrone.forward(300);
+	    	System.out.println("Moved forward 300cm");
+
+	    	// Turn to align with the original orientation
+	    	myDrone.rotateRight(100);
+
+	    	System.out.println("Completed the triangle");
+	    	
+
+	 
+	         myDrone.land();
+
+
+	}
+
+}
