@@ -1,0 +1,131 @@
+package labs.drone;
+/**
+* @author Hossein Valavi
+*
+*/
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import javax.swing.*;
+import tellolib.camera.TelloCamera;
+import tellolib.control.DroneControl;
+import tellolib.command.TelloFlip;
+public class Lab5Mission2 implements KeyListener {
+	static DroneControl myDrone = DroneControl.getInstance();
+	static TelloCamera camera = TelloCamera.getInstance();
+	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	public static void main(String[] args) {
+		JFrame frame = new JFrame("Drone Controller Window:");
+		Lab5Mission2 keyboardInput = new Lab5Mission2();
+		frame.addKeyListener(keyboardInput);
+		frame.getContentPane().setBackground(Color.GRAY);
+		frame.setSize(screenSize.width / 2 - 200, screenSize.width / 2 - 200);
+		frame.setLocationRelativeTo(null);
+		frame.setLocation(screenSize.width / 2, 0);
+		JLabel label = new JLabel("        You should click on this window to be able to control the drone...");
+		label.setFont(new Font("Arial", Font.PLAIN, 20));
+		label.setForeground(Color.YELLOW);
+		frame.add(label);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		myDrone.connect();
+		System.out.println("Connected to the Drone...");
+		myDrone.enterCommandMode();
+		myDrone.startKeepAlive();
+		// Send command to turn on live video streaming -- It may take several seconds.
+		myDrone.streamOn();
+		camera.startVideoCapture(true);
+		camera.startRecording(System.getProperty("user.dir") + "\\Photos");
+		frame.setVisible(true);
+	}
+	@Override
+	public void keyPressed(KeyEvent e) {
+		int keyCode = e.getKeyCode();
+		try {
+			
+			//////////////////////////////////////////////////////////////////
+			//////////////////////////////////////////////////////////////////
+			///////////////////// Your code goes here ///////////////////////
+			//////////////////////////////////////////////////////////////////
+			//////////////////////////////////////////////////////////////////
+			switch (keyCode) {
+				case KeyEvent.VK_T:
+					System.out.println("Taking off...");
+					myDrone.takeOff();
+					break;
+	
+				case KeyEvent.VK_L:
+					System.out.println("Landing...");
+	    			camera.stopRecording();
+	    			camera.stopVideoCapture();
+	    			myDrone.streamOff();
+	    			myDrone.land();
+					break;
+			
+	
+	
+				case KeyEvent.VK_UP:
+					System.out.println("Up arrow key pressed.");
+					myDrone.up(50);
+					break;
+	
+				case KeyEvent.VK_DOWN:
+					System.out.println("Down arrow key pressed.");
+					myDrone.down(50);
+					break;
+	
+				case KeyEvent.VK_LEFT:
+					System.out.println("Left arrow key pressed.");
+					myDrone.left(90);
+					break;
+	
+				case KeyEvent.VK_RIGHT:
+					System.out.println("Right arrow key pressed.");
+					myDrone.right(50);
+					break;
+					
+				case KeyEvent.VK_F:
+					System.out.println(" F key pressed move forward 50 cm");
+	    			
+	    			myDrone.forward(50);
+					break;
+				case KeyEvent.VK_B:
+					System.out.println("B key pressed move backward 50 cm");
+	    			
+	    			myDrone.backward(50);
+					break;
+				case KeyEvent.VK_R:
+					System.out.println("R key pressed rotate counter clockwise 45 degrees");
+	    			
+	    			myDrone.rotateLeft(45);
+				case KeyEvent.VK_X:
+				
+					System.out.println("X key pressed backflip");
+                  myDrone.doFlip(TelloFlip.backward);
+           
+					break;
+				case KeyEvent.VK_Z:
+					System.out.println(" Z key pressed front flip");
+	    			 myDrone.doFlip(TelloFlip.forward);
+					break;
+					
+	
+				default:
+					// Do nothing.
+			}
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// Do nothing.
+	}
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// Do nothing.
+	}
+
