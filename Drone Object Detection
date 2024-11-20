@@ -1,0 +1,79 @@
+package labs.drone;
+/**
+* @author Hossein Valavi, Venus Dinari, Habeba Hossain and Althea Aguel
+*
+*/
+import tellolib.camera.MissionDetectionCamera;
+import tellolib.control.DroneControl;
+import tellolib.drone.DroneStatus;
+import java.util.ArrayList;
+import tellolib.command.TelloFlip;
+public class Lab7Mission1 {
+	static DroneControl myDrone = DroneControl.getInstance();
+	static DroneStatus myDroneStat = DroneStatus.getInstance();
+	static boolean padFound;
+	static int padId = 0;
+	public static void main(String[] args) {
+		myDrone.connect();
+		myDrone.enterCommandMode();
+		myDrone.startKeepAlive();
+		myDrone.startStatusMonitor();
+		myDrone.takeOff();
+		// Turn on Mission Pad detection and select camera to monitor.
+		myDrone.setMissionMode(true, MissionDetectionCamera.downward);
+		// Create background thread to watch for mission pad under drone. It
+		// will signal to stop the search. WatchForPad is defined below.
+		WatchForPad padWatcher = new WatchForPad();
+		padWatcher.start();
+		///////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////
+		//////////////////////// Your code goes here //////////////////////
+		///////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////
+		int[] padIDs = new int[4];
+		int count = 0;
+		// Move the drone forward in increments to detect all pads along the line
+		for (int i = 0; i < 4; i++) { // Loop for four mission pads
+			myDrone.forward(135); // Move forward 100 cm to reach the next pad
+			// Check if a pad was detected
+			if (padFound) {
+				padIDs[count] = padId;
+				count++;// Store the detected pad ID
+				System.out.println(padId);
+				// Perform actions based on even or odd pad ID
+				if (padId % 2 == 0) {
+					myDrone.doFlip(TelloFlip.backward);
+				} // Perform a backward flip for even pad IDs
+				padFound = false; // Reset padFound for the next pad
+			}
+		}
+			// land the drone after detecting all pads
+			myDrone.land();
+			System.out.print("I see pad ID ");
+			for (int id : padIDs) {
+				System.out.print(id + " ");
+			}
+			System.out.println();
+			myDrone.disconnect();
+		
+	}
+	static class WatchForPad extends Thread {
+		@Override
+		public void run() {
+			try {
+				// Loop until we are done.
+				while (!isInterrupted() && myDroneStat.isFlying()) {
+					padId = myDroneStat.getMissionPadId();
+					// Pad id greater than zero means a pad is detected.
+					if (padId > 0) {
+						padFound = true;
+					}
+					sleep(10); // Wait 10 ms.
+				}
+			} catch (InterruptedException e) {
+			}
+		}
+	}
+}
+
+
