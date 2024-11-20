@@ -1,0 +1,153 @@
+MISSION 1
+package labs.drone;
+
+/**
+ * @author Venus dinari and Althea Alguel
+ * 
+ */
+
+import tellolib.communication.TelloConnection;
+import tellolib.control.DroneControl;
+import tellolib.camera.TelloCamera;
+
+public class Lab5Mission1 {
+	public static void main(String[] args) {
+
+	    DroneControl myDrone = DroneControl.getInstance();
+	    TelloCamera	camera = TelloCamera.getInstance();
+
+	    try { myDrone.connect();
+        System.out.println("Connected to the Drone...");
+        myDrone.enterCommandMode();
+
+
+        ///////////////////////////////////////////////////////////////
+        // Send command to turn on live video streaming -- It may take several //seconds.
+        myDrone.streamOn();
+        camera.startVideoCapture(true);
+
+
+        // Start recording the video stream to a .avi file in the Photos directory   // 	of this workspace.
+        camera.startRecording(System.getProperty("user.dir") + "\\Photos");
+
+
+        System.out.println("Taking off...");
+        myDrone.takeOff();
+        
+        
+        myDrone.up(80);
+        int forward = 160; 
+
+
+
+// Turn 360 degrees to the left 
+    myDrone.rotateLeft(360);
+    System.out.println("Turned left 360 degrees");
+       
+//Move forward 200 cm
+            myDrone.forward(forward);
+            System.out.println("Moved forward 200 cm");
+        ///////////////////////////////////////////////////////////////
+// Taking a picture... It will be saved under the Photos directory of this workspace
+        camera.takePicture(System.getProperty("user.dir") + "\\Photos", "wallA");
+        ///////////////////////////////////////////////////////////////
+
+
+
+
+//Move backward 200 cm
+            myDrone.backward(forward);
+            System.out.println("Moved backward 200 cm");
+// Turn 90 degrees to the left (interior angle of an equilateral triangle)
+    myDrone.rotateLeft(90);
+    System.out.println("Turned left 90 degrees");
+
+
+//Move forward 200 cm
+            myDrone.forward(forward);
+            System.out.println("Moved forward 200 cm");
+
+
+        ///////////////////////////////////////////////////////////////
+// Taking a picture... It will be saved under the Photos directory of this workspace
+        camera.takePicture(System.getProperty("user.dir") + "\\Photos", "wallB");
+        ///////////////////////////////////////////////////////////////
+
+
+
+
+//Move backward 200 cm
+            myDrone.backward(forward);
+            System.out.println("Moved backward 200 cm");
+// Turn 90 degrees to the left (interior angle of an equilateral triangle)
+    myDrone.rotateLeft(90);
+    System.out.println("Turned left 90 degrees");
+
+
+//Move forward 200 cm
+            myDrone.forward(forward);
+            System.out.println("Moved forward 200 cm");
+
+
+        ///////////////////////////////////////////////////////////////
+// Taking a picture... It will be saved under the Photos directory of this workspace
+        camera.takePicture(System.getProperty("user.dir") + "\\Photos", "wallC");
+        ///////////////////////////////////////////////////////////////
+
+
+
+
+//Move backward 200 cm
+            myDrone.backward(forward);
+            System.out.println("Moved backward 200 cm");
+// Turn 90 degrees to the left (interior angle of an equilateral triangle)
+    myDrone.rotateLeft(90);
+    System.out.println("Turned left 90 degrees");
+
+
+//Move forward 200 cm
+            myDrone.forward(180);
+            System.out.println("Moved forward 200 cm");
+
+
+        ///////////////////////////////////////////////////////////////
+// Taking a picture... It will be saved under the Photos directory of this workspace
+        camera.takePicture(System.getProperty("user.dir") + "\\Photos", "wallD");
+        ///////////////////////////////////////////////////////////////
+
+
+
+
+//Move backward 200 cm
+            myDrone.backward(180);
+            System.out.println("Moved backward 200 cm");
+// Turn 90 degrees to the left (interior angle of an equilateral triangle)
+    myDrone.rotateLeft(90);
+    System.out.println("Turned left 90 degrees");
+
+
+   
+    }
+   
+    catch (Exception e) {
+        e.printStackTrace();
+    }
+   
+    finally {
+        if (myDrone.getConnection() == TelloConnection.CONNECTED) {
+            try {
+                camera.stopRecording();
+                camera.stopVideoCapture();
+                myDrone.streamOff();
+                myDrone.land();
+                }
+            catch(Exception e) { e.printStackTrace();}
+        }
+    }
+
+
+}
+
+
+
+}
