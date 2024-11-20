@@ -1,17 +1,17 @@
-# **ECE 115 Drone Lab Repository**
+# **Drone Lab Repository**
 
-Welcome to the **ECE 115 Drone Lab Repository**, where you'll find various projects designed to demonstrate drone programming, navigation, and control using the Tello drone. Each lab focuses on different aspects of drone automation, interaction, and functionality, combining hardware control with software logic to create exciting and educational demonstrations.
+Welcome to the **Drone Lab Repository**, a collection of projects showcasing various drone programming techniques and flight control experiments using the Tello drone. Each lab explores unique aspects of drone automation and real-time control, blending hardware interaction with software logic to create dynamic and engaging demonstrations.
 
 ---
 
 ## **Overview**
 
-This repository contains several missions from our ECE 115 coursework, ranging from basic drone movements to advanced automated tasks and real-time control interfaces. Through these projects, you will learn how to:
+This repository contains multiple drone missions, ranging from basic flight paths to advanced automation and user-interactive controls. You'll find projects focused on:
 
-- Establish and manage a connection with the drone.
-- Automate flight paths for specific goals like navigation and photography.
-- Control the drone in real time using GUI or keyboard inputs.
-- Leverage advanced features such as video streaming, flips, and rotations.
+- Establishing connections with the drone and configuring command modes.
+- Automating navigation for photography and exploration.
+- Developing graphical or keyboard-based interfaces for real-time control.
+- Utilizing advanced drone capabilities like flips, rotations, and mission pad detection.
 
 ---
 
@@ -21,37 +21,37 @@ This repository contains several missions from our ECE 115 coursework, ranging f
 - **Goal**: Program the drone to fly in a precise equilateral triangle pattern.  
 - **Key Features**:
   - Takeoff and altitude adjustments.
-  - Move forward and execute precise angular rotations to complete the triangle.
-  - Land the drone safely after the flight.  
+  - Forward movement and calculated angular rotations to complete the triangle.
+  - Safe landing after completing the flight.
 
 ### **Lab 5 - Automated Navigation and Real-Time Control**
 #### **Mission 1: Automated Aerial Photography and Navigation**  
-- **Goal**: Automate a flight path to capture images of predefined points.  
+- **Goal**: Automate a flight path to capture images at specific locations.  
 - **Key Features**:
-  - Record and stream live video during the flight.
-  - Take high-resolution photos at strategic points.
-  - Navigate with precise movements and rotations to explore the environment.  
+  - Stream and record live video during the flight.
+  - Capture high-resolution images at predefined points.
+  - Execute a structured navigation sequence with precise movements and rotations.
 
 #### **Mission 2: Real-Time Drone Control with Keyboard Input**  
-- **Goal**: Enable manual drone control through keyboard inputs.  
+- **Goal**: Enable manual control of the drone through keyboard inputs.  
 - **Key Features**:
-  - Control movements (up, down, forward, backward, left, right).
-  - Execute advanced maneuvers like flips and rotations.
-  - Record video and display real-time video streams.  
+  - Control the drone's movement in all directions (up, down, forward, backward, left, right).
+  - Execute advanced maneuvers like flips and rotations using specific keys.
+  - Stream and record live video for real-time interaction.
 
 ### **Lab 6 - GUI-Based Drone Control**  
-- **Goal**: Create a user-friendly graphical interface for controlling the drone.  
+- **Goal**: Design a graphical user interface (GUI) for simplified drone control.  
 - **Key Features**:
-  - A 4x4 grid of buttons to perform various drone commands (takeoff, flips, altitude changes, etc.).
-  - Monitor drone telemetry like battery status, height, and temperature.
-  - Simplified interaction for beginners with visual controls.
+  - A 4x4 grid of buttons for various drone commands (takeoff, flips, altitude changes, etc.).
+  - Display telemetry data, such as battery status, height, and temperature.
+  - Provide an intuitive interface for beginners and experienced users alike.
 
 ### **Lab 7 - Mission Pad Detection**  
-- **Goal**: Program the drone to detect and interact with mission pads autonomously.  
+- **Goal**: Automate drone navigation to detect and interact with mission pads.  
 - **Key Features**:
   - Enable mission pad detection using the drone's downward-facing camera.
-  - Perform specific actions based on pad IDs, such as executing flips for even-numbered pads.
-  - Navigate and detect up to four mission pads along a linear path.
+  - Perform specific actions (e.g., flips) based on pad IDs.
+  - Navigate a linear path to detect up to four mission pads.
 
 ---
 
@@ -59,39 +59,37 @@ This repository contains several missions from our ECE 115 coursework, ranging f
 
 1. **Clone the Repository**  
    ```bash
-   git clone https://github.com/your-username/ece115-drone-labs.git
-   cd ece115-drone-labs
+   git clone https://github.com/your-username/drone-lab-repo.git
+   cd drone-lab-repo
    ```
 
 2. **Setup Instructions**:
-   - Ensure you have access to a Tello drone and install the **TelloLib** library.
-   - Configure your environment to support Java development (e.g., IntelliJ IDEA or Eclipse).
-   - Use a computer with Wi-Fi to connect to the drone.
+   - Ensure you have a Tello drone and the **TelloLib** library installed.
+   - Configure your development environment for Java (e.g., IntelliJ IDEA or Eclipse).
+   - Use a Wi-Fi-enabled computer to connect to the drone.
 
 3. **Run the Projects**:
-   - Navigate to the respective lab folder and open the Java file.
-   - Follow the instructions in the comments to execute the program.  
+   - Navigate to the desired lab folder and open the corresponding Java file.
+   - Follow the in-code comments and instructions to execute the program.
 
 ---
 
 ## **How It Works**
 
-Each project includes detailed comments and modular code to simplify learning. Concepts like threading, graphical interfaces, and drone-specific commands are utilized to create interactive and engaging demonstrations. By exploring these labs, you can build a solid foundation in drone programming.
+Each project is written with modular code and detailed comments to make learning straightforward. The labs incorporate concepts such as threading, graphical interfaces, and drone-specific commands, helping you develop a strong understanding of drone programming and control.
 
 ---
 
 ## **Contributors**
 
-This repository was created by:  
+This repository was contrubited by:  
 - **Venus Dinari**  
 - **Althea Aguel**  
 - **Hossein Valavi**  
 - **Habeba Hossain**
 
-We collaborated to design and implement these missions as part of the **ECE 115 Drone Lab**.
+We collaborated to design and implement these projects as part of our drone programming exploration.
 
 ---
-
-
 
 Happy flying! 🚁
