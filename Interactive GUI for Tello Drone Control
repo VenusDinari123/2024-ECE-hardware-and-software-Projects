@@ -1,0 +1,194 @@
+package labs.drone;
+/**
+* @author  Hossein Valavi, Venus Dinari, Habeba Hossain, and Althea Aguel
+* Basic GUI for controlling TelloEdu Drones
+*/
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import tellolib.command.TelloFlip;
+import tellolib.control.DroneControl;
+public class Lab6Mission1 {
+	public static void main(String[] args) {
+		
+		DroneControl myDrone = DroneControl.getInstance();
+		myDrone.connect();
+		myDrone.enterCommandMode();
+		
+       JFrame frame = new JFrame("ECE 115 Drone Control GUI");
+       frame.setLayout(new FlowLayout());
+       frame.setSize(450, 200);
+       frame.setBackground(Color.GRAY);
+       // Create a 4x4 array of buttons
+       JButton[][] buttons = new JButton[4][4];
+       for (int i = 0; i < 4; i++) {
+           for (int j = 0; j < 4; j++) {
+               buttons[i][j] = new JButton("Button " + i + " " + j);
+           }
+       }
+      
+       // Add the buttons to the frame
+       for (int i = 0; i < 4; i++) {
+           for (int j = 0; j < 4; j++) {
+               frame.add(buttons[i][j]);
+           }
+       }
+       		
+		frame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+		frame.setVisible(true);
+		
+		///////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////
+		//////////////////////// Your code goes here //////////////////////
+		///////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////
+      
+		//// Code for taking off
+       buttons[0][0].setText("Take Off");
+		buttons[0][0].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Taking Off....");
+				myDrone.takeOff();
+			}
+		});
+		
+	//// Code for moving up by 30cm
+       buttons[0][1].setText("Moving up");
+		buttons[0][1].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Moving up....");
+				myDrone.up(30);
+			}
+		});
+	//// Code for flipping foward
+       buttons[0][2].setText("Flipping forward");
+		buttons[0][2].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Flipping forward....");
+				myDrone.doFlip(TelloFlip.forward);;
+			}
+		});
+	//// Code for moving forward
+       buttons[0][3].setText("Moving forward");
+		buttons[0][3].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Moving forward....");
+				myDrone.forward(100);
+			}
+		});
+	//// Code for moving left by 50cm
+       buttons[1][0].setText("Moving left");
+		buttons[1][0].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Moving left....");
+				myDrone.left(50);
+			}
+		});
+	//// Code for printing height
+       buttons[1][1].setText("Height");
+		buttons[1][1].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Getting height...." + myDrone.getHeight());
+				myDrone.getHeight();
+			}
+		});
+		
+	//// Code for moving right by 30cm
+       buttons[1][2].setText("Moving right");
+		buttons[1][2].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Moving right....");
+				myDrone.right(30);
+			}
+		});
+		
+	//// Code for moving back
+       buttons[1][3].setText("Moving back");
+		buttons[1][3].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Moving back....");
+				myDrone.backward(100);
+			}
+		});
+		
+	//// Code for printing  battery
+       buttons[2][0].setText("Battery");
+		buttons[2][0].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Getting Battery...." + myDrone.getBattery());
+				myDrone.getBattery();
+			}
+		});
+		
+	//// Code for moving down by 30cm
+       buttons[2][1].setText("moving down");
+		buttons[2][1].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("moving down....");
+				myDrone.down(30);
+			}
+		});
+		
+	//// Code for rotating left
+       buttons[2][2].setText("rotating left");
+		buttons[2][2].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("rotating left....");
+				myDrone.rotateLeft(30);
+			}
+		});
+		
+	//// Code for rotating right
+       buttons[2][3].setText("rotating right");
+		buttons[2][3].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("rotating right....");
+				myDrone.rotateRight(90);
+			}
+		});
+		
+	////  print barometer
+       buttons[3][0].setText("Print Barometer");
+		buttons[3][0].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Getting Barometric Pressure...."+myDrone.getBarometer());
+				myDrone.getBarometer();
+			}
+		});
+		
+	//// Code for print temp
+       buttons[3][1].setText("Print Temp");
+		buttons[3][1].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Getting Temperature...."+ myDrone.getTemp());
+				myDrone.getTemp();
+			}
+		});
+		
+	//// Code for flip back
+       buttons[3][2].setText("Flip back");
+		buttons[3][2].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Flip Back....");
+				myDrone.doFlip(TelloFlip.backward);;
+			}
+		});
+		
+		
+       //// Code for Landing
+		buttons[3][3].setText("Land");
+		buttons[3][3].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Landing....");
+				myDrone.land();
+			}
+		});
+      
+		
+	}
+}
+
